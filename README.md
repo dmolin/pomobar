@@ -12,6 +12,10 @@ Pomodoro timer to polybar
 * Polybar
 * Icons: FontAwesome
 
+## Getting Started
+
+Only need copy pomobar.py in your system and call it in polybar
+
 ## Polybar config:
 ~~~
 .config/polybar/config
