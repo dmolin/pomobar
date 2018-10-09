@@ -1,6 +1,8 @@
 # pomobar
 Pomodoro timer to polybar
-
+![](img/.gif)
+![](img/.gif)
+![](img/.gif)
 ~~~
 .config/polybar/config
 [module/pomobar]
