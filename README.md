@@ -1,8 +1,18 @@
-# pomobar
+# Pomobar
+
+---
+
 Pomodoro timer to polybar
 ![](img/2018-10-09-224812_124x19_scrot.png)
 ![](img/2018-10-09-224825_79x19_scrot.png)
 ![](img/2018-10-09-224837_72x20_scrot.png)
+
+## Requeriments 
+
+* Polybar
+* Icons: FontAwesome
+
+## Polybar config:
 ~~~
 .config/polybar/config
 [module/pomobar]
