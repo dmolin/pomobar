@@ -43,7 +43,7 @@ def get_pomodoros_done():
     return pomodorosAcumulados
 
 def start_pomodoro():
-    mins = 5
+    mins = 25
 
     while mins >= 0:
         fileOutput = open(".pomobaroutput", "w")
@@ -52,7 +52,7 @@ def start_pomodoro():
         # Reduce the minute total
         os.system('polybar-msg hook pomobar 1')
         # Sleep for a minute
-        time.sleep(1)
+        time.sleep(60)
         mins -= 1
 
     if mins <= 0:
