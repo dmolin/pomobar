@@ -1,12 +1,15 @@
 #!/usr/bin/python3
-##############################
-# AUTHOR: Antonio Alonso
+#############################################################
+# AUTHOR: Loopzen
 # DATE: 2018-10-09
-# DESCRIPTION:
-# TODO: pending
-# contador de pomododrso global
-# subirlo a githb
-##############################
+# DESCRIPTION: Pomodoro timer to polybar
+# - Counter of all your completed pomodoros
+# - Desktop notifications
+# REQUERIMENTS:
+# - polybar
+# - dunst
+# - fontAwesome
+#############################################################
 import time
 import os
 import sys
@@ -21,30 +24,51 @@ def kill_another_instances():
     filePids.close()
     os.system('rm pomobar.pid')
 
+def increment_global_pomodoro_counter():
+    # Read
+    filePomodoroCounter = open(".pomodoroCounter", "r")
+    pomodorosAcumulados = filePomodoroCounter.readline()
+    filePomodoroCounter.close()
+    # Increment
+    pomodorosAcumulados = int(pomodorosAcumulados) + 1
+    # Write
+    filePomodoroCounter = open(".pomodoroCounter", "w")
+    filePomodoroCounter.write(str(pomodorosAcumulados));
+    filePomodoroCounter.close()
+
+def get_pomodoros_done():
+    filePomodoroCounter = open(".pomodoroCounter", "r")
+    pomodorosAcumulados = filePomodoroCounter.read()
+    filePomodoroCounter.close()
+    return pomodorosAcumulados
+
 def start_pomodoro():
-    mins = 25
+    mins = 5
 
     while mins >= 0:
-        fileOutput = open("pomobaroutput", "w")
-        fileOutput.write(" " + str(mins))
+        fileOutput = open(".pomobaroutput", "w")
+        fileOutput.write(" " + str(mins))
         fileOutput.close()
         # Reduce the minute total
         os.system('polybar-msg hook pomobar 1')
         # Sleep for a minute
-        time.sleep(60)
+        time.sleep(1)
         mins -= 1
 
     if mins <= 0:
-        fileOutput = open("pomobaroutput", "w")
-        fileOutput.write(" pomodoro")
+        increment_global_pomodoro_counter()
+        pomodorosAcumulados = get_pomodoros_done()
+        fileOutput = open(".pomobaroutput", "w")
+        fileOutput.write(" " + pomodorosAcumulados)
         fileOutput.close()
         os.system('polybar-msg hook pomobar 1')
+        os.system('notify-send --urgency=normal Pomodoro finished')
 
 def break_time():
     mins = 5
 
     while mins >= 0:
-        fileOutput = open("pomobaroutput", "w")
+        fileOutput = open(".pomobaroutput", "w")
         fileOutput.write(" " + str(mins))
         fileOutput.close()
         # Reduce the minute total
@@ -54,14 +78,16 @@ def break_time():
         mins -= 1
 
     if mins <= 0:
-        fileOutput = open("pomobaroutput", "w")
+        fileOutput = open(".pomobaroutput", "w")
         fileOutput.write(" pomodoro")
         fileOutput.close()
         os.system('polybar-msg hook pomobar 1')
+        os.system('notify-send --urgency=low Break finished')
 
 def kill_pomodoro():
-    fileOutput = open("pomobaroutput", "w")
-    fileOutput.write(" pomodoro")
+    pomodorosAcumulados = get_pomodoros_done()
+    fileOutput = open(".pomobaroutput", "w")
+    fileOutput.write(" " + pomodorosAcumulados)
     fileOutput.close()
     os.system('polybar-msg hook pomobar 1')
 
