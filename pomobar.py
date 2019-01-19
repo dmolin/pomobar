@@ -9,7 +9,6 @@
 # - polybar
 # - dunst
 # - fontAwesome
-# TODO: hacer un gif y subirlo
 ##############################################################################
 from os.path import expanduser
 import os
