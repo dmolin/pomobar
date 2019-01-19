@@ -3,7 +3,7 @@
 ---
 
 Pomodoro timer to polybar
-![](img/pomobar.gif)
+![](img/pomodoro.gif)
 
 ## Requeriments 
 
