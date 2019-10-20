@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 ##############################################################################
 # AUTHOR: [Loopzen](https://github.com/loopzen/)
 # DATE: 2018-10-09
