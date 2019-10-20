@@ -16,6 +16,9 @@ Only need copy pomobar.py in your system and call it in polybar
 
 ## Polybar config:
 ~~~.config/polybar/config
+
+enable-ipc = true
+
 [module/pomobar]
 type=custom/ipc
 hook-0 = cat ~/.pomobaroutput
